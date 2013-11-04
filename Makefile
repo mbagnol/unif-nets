@@ -24,15 +24,15 @@ $(NOM).aux:
 
 clean:
 	cd compilation; rm -f *
-	rm -r *~
-	cd styles; rm -r *~
-	rm *.pdf
+	rm -rf *~
+	cd styles; rm -rf *~
+	rm -f *.pdf
 
 push:
-	make clean &
+	make clean
 	git add .
 	git commit -m "no comment"
-	git push origin
+	git push git@github.com:mbagnol/unif-nets.git
 
 pull:
 	git pull
