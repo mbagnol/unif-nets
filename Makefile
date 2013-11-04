@@ -10,7 +10,7 @@ _always:
 	gnome-open $(NOM).pdf
 
 biblio: $(NOM).aux
-	mkdir compilation/ &
+	mkdir -p compilation/
 	cp -f images/* compilation/ &
 	cp -f styles/* compilation/ &
 	cp -f *.tex *.cls *.bib *.sty compilation/ &
@@ -19,6 +19,9 @@ biblio: $(NOM).aux
 	xdg-open $(NOM).pdf &
 
 $(NOM).aux:
+	mkdir -p compilation/
+	cp -f images/* compilation/ &
+	cp -f styles/* compilation/ &
 	cp -f *.tex *.cls *.bib *.sty compilation/ &
 	cd compilation; pdflatex -jobname $(NOM) -halt-on-error MAIN.tex
 
