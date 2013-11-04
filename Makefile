@@ -38,7 +38,7 @@ push:
 	git push git@github.com:mbagnol/unif-nets.git
 
 pull:
-	git pull
+	git pull git@github.com:mbagnol/unif-nets.git
 
 upload:
 	mkdir compilation/ &
