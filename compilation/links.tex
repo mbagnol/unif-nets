@@ -1,0 +1,216 @@
+\section{Links and linkings}\label{links}
+
+\define[$\,P(T)\,$]
+	{Let $\,T\,$ be a set of terms and $\,P=\{\,p_1,\dots,p_n\,\}\,$ a set of unary function symbols, we note $\,P(T)\,$ the set of linear terms (\textit{ie.} in which each variable occurs only once) of the form $\,p(t)\,$ where $\,p\in P\,$ and $\,t\in T\,$.
+}
+
+
+\define[link]
+	{A \textbf{link} $\,l\,$ over $\,P(T)\,$ is a pair $\,\link{\BF H(l)}{\BF C(l))}\,$ of sets of terms of $\,P(T)\,$ sharing the same variables, such that elements of $\,\BF P(l):=H(l)\cup C(l)\,$ are pairwise disjoint.
+	
+	\smallskip
+	We call $\,\BF H(l)\,$ the \textbf{hypothesis} of $\,l\,$, $\,\BF C(l)\,$ the \textbf{conclusions} of $\,l\,$ and $\,\BF P(l)\,$ the \textbf{ports} of $\,l\,$.
+	
+	\smallskip
+	Substitutions act on links the following way: if $\,\theta\,$ is a substitution, $\,l.\theta:=\link{u.\theta\,,\ u\,\in\,\BF H(l)}{v.\theta\,,\ v\,\in\,\BF C(l)}\,$. In particular, if $\,l\,$ is a link and $\,\alpha\,$ a variable renaming, we say that $\,l.\alpha\,$ is a \textbf{renaming} of $\,l\,$.
+	
+	\smallskip
+	A \textbf{closed link} is an equivalence class of links under renaming. We write $\,\class l\,$ the equivalence class of $\,l\,$.
+}
+
+\define[disjointness]
+	{Two links $\,l_1,l_2\,$ are said to be \textbf{disjoint} if any $\,u_1\in\BF H(l_1)\,$ and $\,u_2\in\BF H(l_2)\,$ are disjoint, and any $\,v_1\in\BF C(l_1)\,$ and $\,v_2\in\BF C(l_2)\,$ are disjoint.
+	
+	Two closed link $\,\class l_1\,$ and $\,\class l_2\,$ are \textbf{disjoint} if $\,l_1\,$ and $\,l_2\,$ are disjoint.
+}
+
+This is independant of the representative of the equivalence class.
+
+\define[linking]
+	{A \textbf{linking} $\,G\,$ over $\,P(T)\,$ is a set of pairwise disjoint closed links over $\,P(T)\,$.
+	
+	The representatives of the closed link of $\,G\,$ are called simply called the \textbf{links of} $\,G\,$.
+}
+
+
+The links are the basic objects of the model. Linkings will be used both to represent sets of axiom links (the proof-program) or so called \textit{gabarits} (the correctness criterion).
+
+\smallskip
+Their dynamic behaviour is the formation and contraction of \textit{diagrams}. That we describe now.
+
+\newpage
+\section{Diagrams}
+
+We consider edge-induced (directed) hypergraphs: their set of nodes are implicitely given as the reunion of the sources and targets of their set of (hyper)edges.
+
+\define[linear hypergraph]
+	{A hypergraph $\,G\,$ is \textbf{linear} if \label{linear-hg}
+	\begin{itemize}
+		\item no node is the source, resp. the target, of two different edges;
+		\item it is connected and acyclic.
+	\end{itemize}
+}
+
+\define[diagram]
+	{Let $\,G\,$ be a linking over $\,P(T)\,$ and $\,Q \subseteq P\,$.
+
+	\smallskip
+	A $Q$-\textbf{diagram} $\,D\,$ of $\,G\,$ is a finite linear hypergraph (definition \ref{linear-hg}) induced by two sets of edges $\,L_D\,$ and $\,E_D\,$, the \textbf{links} and the \textbf{equations} of $\,D\,$:
+\begin{itemize}
+	\item $\,L_D\,$ is a set of links of $\,G\,$;
+	\item $\,E_D\,$ is a set of simple edges $\,\{u\} \edge \{v\}\,$ with $\,u,v\in Q(T)\,$ such that $\,u\in \BF C(l)\,$ for some $\,l\in L_D\,$ and $\,v\in \BF H(l')\,$ for some $\,l'\in L_D\,$.
+\end{itemize}
+	
+	$D\,$ is \textbf{saturated} if any node that is in $\,Q(T)\,$ is either the source or the target of a link in~$\,E_D\,$.
+
+	\smallskip
+	If $\,\alpha\,$ is a variable renaming, $\,D.\alpha\,$ is the hypergraph induced by
+	$$L_D.\alpha:=\{\:l.\alpha\;|\; l\in L_D\:\} \quad \text{and} \quad E_D.\alpha:=\left\{\:\{u.\alpha\} \edge \{v.\alpha\}\;|\; \{u\} \edge \{v\}\in E_D\:\right\}$$
+	A \textbf{closed $Q$-diagram} is an equivalence class of diagrams under renaming. We write $\,\class D\,$ the equivalence class of $\,D\,$.
+}
+
+
+
+\define[unification]
+	{A diagram $\,D\,$ is \textbf{unifiable} if the set of equations $\,P_D:=\left\{\;\unif uv \;|\; \{u\} \edge \{v\}\in E_D\;\right\}\,$ has a solution. Let in that case $\,\theta\,$ be a MGU of $\,P_D\,$.
+	
+	\smallskip
+	We define $\,D.\theta\,$ as the hypergraph induced by the edges
+	$$l.\theta \;,\;l\in L_D$$
+	
+	The \textbf{hypothesis} $\,\BF H(D.\theta)\,$ of $\,D.\theta\,$ are nodes of $\,D.\theta\,$ that are the target of no edge.
+
+The \textbf{conclusions} $\,\BF C(D.\theta)\,$ of $\,D.\theta\,$ are nodes of $\,D.\theta\,$ that are the source of no edge.
+
+\smallskip
+The \textbf{contraction} $\,\BF c(D.\theta)\,$ of $\,D.\theta\,$ is the link $\,\link {\BF H(D.\theta)}{\BF C(D.\theta)}\,$.
+}
+
+\remark{Consider a closed diagram. If any of its representatives is unifiable, then all its representatives are unifiable. Moreover the closed link one obtains from its contraction depends neither on the choice of the representative nor on the choice of a MGU. We can therefore speak unambiguously of a \textbf{unifiable closed diagram} $\,\class D\,$ and of its \textbf{contraction} $\,\BF c(\class D)\,$.}
+
+
+\medskip
+The fact that the contraction of an unifiable diagram is actually a link is an easy lemma.
+
+\lemma
+	{Let $\,D\,$ be a unifiable $Q$-diagram and $\,\theta\,$ a MGU of $\,P_D\,$. The elements of $\,\BF H(D.\theta) \cup \BF C(D.\theta)\,$ share the same variables and are pairwise disjoint.
+}
+
+\define[normal form]
+	{Let $\,G\,$ be a linking over $\,P(T)\,$ and $\,Q \subseteq P\,$.
+	
+	The \textbf{$[Q]$-normal form} of $\,G\,$ is the set
+	$$[Q]G:=\big\{\: \BF c(\class D)\ |\ \class D \:\text{ is a correct and saturated closed } \,Q\text{-diagram} \text{ of }\,G\:\big\} $$
+	\vspace{-4mm}
+}
+
+It remains to show that this is ``associative'' in Girard's acception of the term: $\,[Q\cup S]G=[Q]([S]G)\,$. This should not be too difficult but could be a bit annoying to formalize.
+
+\medskip
+Also one needs to check that the normal form of a linking is still a linking.
+
+\lemma
+	{If $\,D_1,D_2\,$ are two correct and saturated $Q$-diagrams of a linking over $\,P(T)\,$.
+	
+	Any $\,u_1\in \BF H(D_1)\:,\:u_2\in\BF H(D_2)\,$ are paiwise disjoint and $\,v_1\in \BF C(D_1)\:,\:v_2\in\BF C(D_2)\,$ are pairwise disjoint.
+}
+
+\begin{proof}
+One show indeed that two correct diagrams $\,D_1,D_2\,$ such that there is no correct $\,D\,$ with $\,D_1\subseteq D\,$ and $\,D_2\subseteq D\,$ (here off course inclusion is up to renaming...) satisfy the disjointness property.
+\end{proof}
+
+
+
+\section{Contractibility reloaded}
+
+This is an alternative presentation of the dynamics of links and linkings. Here we give a rewriting system that computes step by step the contraction of diagrams. Whether this presentation (or hopefully a better-behaved variant) is handier than graphs is still unclear...
+
+\medskip
+Here we use the undefined notion of \textit{matchability}, a weak variant of unification. Two terms $\,u,v\,$ are matchable whenever there are two substitutions $\,\theta,\phi\,$ such that $\,u.\theta=v.\phi\,$. As unification (this can indeed be reformulated as an actual unification problem, through renaming of variables) if a pair is matchable it has what we will call a \textbf{principal matching pair} (PMP): a pair of substitutions such that any other solution is an instance of this pair.
+
+\smallskip
+Note that here we need not to be as careful with the renaming issues: equivalence classes, distinct sets of variables and so on. We consider always links up to renaming (what we called in the previous section \textit{closed links}).
+
+%\notation{if $\,U\,$ is a set of terms and $\,\theta\,$ a substitution, we write $\,U.\theta\,$ the set of elements of $\,U\,$ to which $\,\theta\,$ was applied.}
+
+\define[contraction]
+	{Let $\,l_1,l_2\,$ be two links, $\,u\in \BF H(l_1)\,$ and $\,v\in \BF C(l_2)\,$.
+	
+	If $\,u,v\,$ are matchable with a PMP $\,\theta,\phi\,$, we say that $\,l_1,l_2\,$ are \textbf{contractible} along $\,u,v\,$. The \textbf{contraction} of $\,l_1,l_2\,$ along $\,u,v\,$ is the link
+	$$(l_1,u)::(l_2,v) := 
+		\link
+		{\BF H(l_1.\theta) \:\cup\:\BF H(l_2.\phi)\ \setminus u.\theta}
+		{\BF C(l_1.\theta) \:\cup \:\BF C(l_2.\phi)\ \setminus v.\phi}$$
+Let $\,G\,$ be a linking over $\,P(T)\,$ and $\,Q \subseteq P\,$.
+
+The $\,\contr_Q\,$-reduction over $\,G\,$ is defined as:
+$$G+l_1+l_2 \:\contr_Q\: G+l_1+l_2+(l_1,u)::(l_2,v)$$
+for all $\,l_1,l_2\,$ that are contractible along $\,u,v\in Q(T)\,$ and $\,(l_1,u)::(l_2,v)\not\in G\,$.
+
+\smallskip
+We call the $Q$-\textbf{saturation} of $\,G\,$, $\,\sat_Q(G)\,$ the smallest set containing $\,G\,$ that is in $\,\contr_Q\,$ normal form.
+}
+
+As it only creates new objects from preexisting ones, the relation $\,\contr_Q\,$ is confluent.
+
+\smallskip
+Of course, $\,\sat_Q(G)\,$ can be infinite, even starting with a finite $\,G\,$.
+
+\medskip
+We can again state the basic properties of contractibility.
+
+\lemma
+	{Let $\,G\,$ be a linking and $\,l_1,l_2\in G\,$ contractible along $\,u,v\,$. Then $\,(l_1,u)::(l_2,v)\,$ is a link.
+}
+
+\define[normal form]
+	{Let $\,G\,$ be a linking over $\,P(T)\,$ and $\,Q \subseteq P\,$.
+
+	The \textbf{$[Q]$-normal form} of $\,G\,$ is the set
+	$$[Q]G:=\big\{\: l \in \sat_Q(G) \ |\ l \:\text{ is a link over } (P\setminus Q)(T)\:\big\} $$
+	\vspace{-4mm}
+}
+
+Now we need to prove again ``associativity'', which should be easier in this formulation.
+
+\smallskip
+Also we have to make sure that the normal form of a linking is a linking.
+
+\lemma
+	{If $\,G\,$ is a linking over $\,P(T)\,$ and $\,Q \subseteq P\,$ then $\,[Q]G\,$.
+}
+
+\proof{The idea we sketched for diagrams should still work, but we do no longer have an immediate notion of inclusion, which will need to be replaced by some order relation on links.
+}
+
+\section{Parsing reloaded}
+
+A third possibility would be to use the notion of \textit{parsing} instead of contractibility. The idea of parsing is to allow more than one contraction step at a time, but with the restriction that it should only produce links that have only conclusions, no hypothesis. It can be formulated directly in the same style as contractibility, and the basic design would be the same, so let's leave it for discussion.
+
+\section{Splitting}
+
+A last idea that is certainly the most messy-experimental at the time. An annoying fact with contractibility (and parsing) is that we have to keep the two links that have been contracted because they may be used another time under another (disjoint) instance. This generates `garbage' and is also the reason why the fact that the normal form of a linking is not totally obvious.
+
+We try here to define another notion of rewriting: splitting. The idea is that a link can split into different instances that are needed to compute, but once split it can be safely discarded.
+
+\define[splitting]
+	{Let $\,l\,$ be a link, $\,u\,$ a port of $\,l\,$ and $\,G\,$ a set of links. The set of \textbf{$u$-matchings} of $\,l\,$ in $\,G\,$, is defined as:
+	\begin{itemize}
+		\item if $\,u\in \BF H(l)\,$, $\,\umatch ulG:= \{\:k\in G\;|\;v\in \BF C(k) \text{ and } u,v \text{ matchable}\:\}$
+		\item if $\,u\in \BF C(l)\,$, $\,\umatch ulG:= \{\:k\in G\;|\;v\in \BF H(k) \text{ and } u,v \text{ matchable}\:\}$
+	\end{itemize}
+	For any $\,k\in \umatch ulG\,$ with $\,v\in \BF P(k)\,$ and $\,u,v\,$ matchable, let $\,\theta_k,\phi_k\,$ be a PMP.
+	The \textbf{$u$-splitting} of $l$ with respect to $G$ is defined as
+	$$\usplit ulG:=\sum_{k\,\in\,\umatch ulG}l.\theta_k$$
+%	\vspace{-5mm}
+	The $\,\contr_Q\,$ reduction is defined as
+	$$G+l \ \contr_Q\ G+\usplit ulG$$
+	when $\,u\in Q(T)\,$.
+}
+
+This reduction is not confluent in general. (exercise: find a counterexample to confluence)
+
+This does not mean it is not in logically relevent cases. This does neither mean that the normal form defined from it is not ``associative''. This would need further investigation.
+
+\medskip
+On the other hand, the fact that this only produces proper links is obvious and, as there is no more garbage, linkings reduce to linkings.

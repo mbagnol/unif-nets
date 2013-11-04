@@ -31,7 +31,7 @@ clean:
 push:
 	make clean &
 	git add .
-	git commit -m "no comment"
+	git commit
 	git push origin
 
 pull:
