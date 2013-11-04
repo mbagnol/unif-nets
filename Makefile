@@ -16,7 +16,7 @@ biblio: $(NOM).aux
 	cp -f *.tex *.cls *.bib *.sty compilation/ &
 	cd compilation; bibtex $(NOM).aux; pdflatex -jobname $(NOM) -halt-on-error MAIN.tex; pdflatex -jobname $(NOM) -halt-on-error MAIN.tex
 	cp compilation/$(NOM).pdf $(NOM).pdf &
-	gnome-open $(NOM).pdf &
+	xdg-open $(NOM).pdf &
 
 $(NOM).aux:
 	cp -f *.tex *.cls *.bib *.sty compilation/ &
