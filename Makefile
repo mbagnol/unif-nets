@@ -1,7 +1,7 @@
 NOM=$(shell basename `pwd`)
 
 _always:
-	mkdir compilation/ &
+	mkdir -p compilation/
 	cp -f images/* compilation/ &
 	cp -f styles/* compilation/ &
 	cp -f *.tex *.cls *.bib *.sty compilation/ &
