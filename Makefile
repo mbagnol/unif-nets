@@ -41,7 +41,7 @@ pull:
 	git pull git@github.com:mbagnol/unif-nets.git
 
 upload:
-	mkdir compilation/ &
+	mkdir -p compilation/
 	cp -f images/* compilation/ &
 	cp -f styles/* compilation/ &
 	cp -f *.tex *.cls *.bib *.sty compilation/ &
