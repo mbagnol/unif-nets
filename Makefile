@@ -47,5 +47,5 @@ upload:
 	cp -f *.tex *.cls *.bib *.sty compilation/ &
 	cd compilation; pdflatex -jobname $(NOM) -halt-on-error MAIN.tex
 	cp compilation/$(NOM).pdf $(NOM).pdf &
-	scp $(NOM).pdf bagnol@iml.univ-mrs.fr:~/HTML/notes/.
-	firefox http://iml.univ-mrs.fr/~bagnol/notes/$(NOM).pdf
+	scp $(NOM).pdf bagnol@iml.univ-mrs.fr:~/HTML/drafts/.
+	firefox http://iml.univ-mrs.fr/~bagnol/drafts/$(NOM).pdf
